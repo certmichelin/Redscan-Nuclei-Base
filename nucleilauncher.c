@@ -21,15 +21,21 @@
 
 /**
  * This program is required to avoid freeze when nuclei is executed from the Java application.
+ * If the launcher is run without argument, it will update nuclei templates.
  */
 int main( int argc, char *argv[] ) {
 	int pid = fork();
 
 	if ( pid == 0 ) {
-        char * command = (char*) malloc(1000 * sizeof(char));
-        sprintf(command, "hostname | nuclei -u %s -t %s -json -silent", argv[1], argv[2]);
-		system(command);
-        free(command);
+		if (argc > 1){
+			char * command = (char*) malloc(1000 * sizeof(char));
+        	sprintf(command, "hostname | nuclei -u %s -t %s -json -silent", argv[1], argv[2]);
+			system(command);
+        	free(command);
+		} else {
+			system("hostname | nuclei -update-templates");
+		}
+        
 	}
 
 	int returnStatus;    
