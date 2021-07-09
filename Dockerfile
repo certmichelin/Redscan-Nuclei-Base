@@ -6,3 +6,8 @@ RUN tar xvfz nuclei_2.3.8_linux_amd64.tar.gz
 RUN chmod +x ./nuclei
 RUN mv ./nuclei /usr/bin
 RUN nuclei -update-templates
+
+#Install launcher
+RUN apt-get update && apt-get install gcc -y
+COPY nucleilauncher.c /nucleilauncher.c
+RUN gcc /nucleilauncher.c -o /nucleilauncher
