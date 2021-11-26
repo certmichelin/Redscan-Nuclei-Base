@@ -1,8 +1,8 @@
 FROM openjdk:8-jre
 
 #Install nuclei
-RUN wget https://github.com/projectdiscovery/nuclei/releases/download/v2.3.8/nuclei_2.3.8_linux_amd64.tar.gz
-RUN tar xvfz nuclei_2.3.8_linux_amd64.tar.gz
+RUN wget https://github.com/projectdiscovery/nuclei/releases/download/v2.5.3/nuclei_2.5.3_linux_amd64.zip
+RUN unzip nuclei_2.5.3_linux_amd64.zip
 RUN chmod +x ./nuclei
 RUN mv ./nuclei /usr/bin
 RUN nuclei -update-templates
