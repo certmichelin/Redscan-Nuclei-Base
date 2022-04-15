@@ -28,8 +28,12 @@ int main( int argc, char *argv[] ) {
 
 	if ( pid == 0 ) {
 		if (argc > 1){
-			char * command = (char*) malloc(1000 * sizeof(char));
-        	sprintf(command, "hostname | nuclei -u %s -t %s -json -silent", argv[1], argv[2]);
+			char * command = (char*) malloc(2000 * sizeof(char));
+			if(argc == 3){
+				sprintf(command, "hostname | nuclei -u %s -t %s -json -silent", argv[1], argv[2]);
+			} else {
+				sprintf(command, "hostname | nuclei -u %s -t %s -eid %s -json -silent", argv[1], argv[2], argv[3]);
+			}
 			system(command);
         	free(command);
 		} else {
